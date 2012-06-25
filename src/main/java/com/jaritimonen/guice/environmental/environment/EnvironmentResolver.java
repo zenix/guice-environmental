@@ -28,15 +28,22 @@ public class EnvironmentResolver {
 
     public List<AbstractModule> resolveWith(EnvironmentNameResolver nameResolver) {
         List<AbstractModule> environments = new ArrayList<AbstractModule>();
-        List<AbstractModule> environmentModules = getEnvironments();
         String environment = nameResolver.getEnvironmentProperty();
-        for (AbstractModule abstractModule : environmentModules) {
+        for (AbstractModule abstractModule : getEnvironments()) {
             Environment annotation = abstractModule.getClass().getAnnotation(Environment.class);
-            if (annotation != null && annotation.value() != null && annotation.value().equalsIgnoreCase(environment)) {
+            if (isNotNull(annotation) && match(environment, annotation)) {
                 environments.add(abstractModule);
             }
         }
         return environments;
+    }
+
+    private boolean match(String environment, Environment annotation) {
+        return annotation.value().equalsIgnoreCase(environment);
+    }
+
+    private boolean isNotNull(Environment annotation) {
+        return annotation != null && annotation.value() != null;
     }
 
     protected List<AbstractModule> getEnvironments() {

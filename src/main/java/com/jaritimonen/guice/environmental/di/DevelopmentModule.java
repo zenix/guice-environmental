@@ -19,7 +19,7 @@ import com.google.inject.AbstractModule;
 import com.jaritimonen.guice.environmental.environment.Environment;
 
 @Environment("DEVELOPMENT")
-public class DevelopmentModule extends AbstractModule{
+public class DevelopmentModule extends AbstractModule {
 
     @Override
     protected void configure() {

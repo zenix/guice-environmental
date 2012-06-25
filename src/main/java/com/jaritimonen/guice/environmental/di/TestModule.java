@@ -19,11 +19,10 @@ import com.google.inject.AbstractModule;
 import com.jaritimonen.guice.environmental.environment.Environment;
 
 @Environment("TEST")
-public class TestModule extends AbstractModule
-{
+public class TestModule extends AbstractModule {
 
     @Override
     protected void configure() {
-    System.out.println("Configuring Test");
+        System.out.println("Configuring Test");
     }
 }
